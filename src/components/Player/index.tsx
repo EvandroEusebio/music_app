@@ -11,9 +11,9 @@ export default function Player() {
   const [isPlay, setIsPlay] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
 
-  const audioRef = useRef<HTMLAudioElement>();
-  const inputRange = useRef()
-
+  const audioRef = React.useRef<HTMLAudioElement>(null);
+  const inputRange = React.useRef<HTMLInputElement>(null)
+  
   useEffect(() => {
     if (isPlay) {
       if (audioRef.current) {
