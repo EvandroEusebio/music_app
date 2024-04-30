@@ -12,8 +12,8 @@ export default function Player() {
   const [isPlay, setIsPlay] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
 
-  const audioRef = React.useRef<HTMLAudioElement>(null);
-  const inputRange = React.useRef<HTMLInputElement>(null);
+  const audioRef = React.useRef(null);
+  const inputRange = React.useRef(null);
   const playAnimationRef = React.useRef(null);
   const clickRef = useRef();
 
@@ -27,7 +27,7 @@ export default function Player() {
 
   const checkWidth = (e) => {
     if (isDragging) {
-      let width = clickRef.current.clientWidth;
+      let width = clickRef.current?.clientWidth;
       const offset = e.nativeEvent.offsetX;
 
       const divprogress = (offset / width) * 100;
@@ -59,7 +59,7 @@ export default function Player() {
     //playAnimationRef.current = requestAnimationFrame(repeat);
   }, [isPlay, audioRef, repeat]);
 
-  const formatTime = (time: any) => {
+  const formatTime = (time) => {
     if (time && !isNaN(time)) {
       const minutes = Math.floor(time / 60);
       const formatMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
@@ -72,14 +72,14 @@ export default function Player() {
 
   return (
     <div className="flex-col gap-5 bg-primary p-10 text-secundary rounded-2xl">
-      <div className="flex gap-3 justify-center content-center">
-        <img src="/profile.jpg" className="block mx-auto h-24 rounded-2xl" />
-        <div className="justify-center content-center">
-          <h1>Da Banda</h1>
-          <h1>Por Evandro Eusébio</h1>
+      <div className="flex max-sm:flex-col gap-3 justify-center content-center ">
+        <img src="/profile.jpg" className="block mx-auto h-24 rounded-2xl max-sm:w-full max-sm:h-auto" />
+        <div className="justify-center content-center max-sm:my-4">
+          <h1 className="text-2xl text-white ">Da Banda</h1>
+          <h1 className="text-secundary">Por Evandro Eusébio</h1>
         </div>
       </div>
-      <div className="flex justify-center gap-20 my-5">
+      <div className="flex justify-center gap-20  max-sm:justify-between">
         <button>
           <IoPlayBack size={20} />
         </button>
@@ -91,14 +91,14 @@ export default function Player() {
         </button>
       </div>
       <div
-        className="w-full h-1 rounded-2xl bg-progressSecundary "
+        className="w-full h-1.5 rounded-2xl bg-progressSecundary  cursor-pointer max-sm:mt-5 max-sm:mb-3"
         ref={clickRef}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
         onMouseMove={checkWidth}
       >
         <div
-          className="h-1 rounded-2xl bg-progressPrimary "
+          className="h-full rounded-2xl bg-progressPrimary "
           style={{ width: `${progress}%` }}
         ></div>
       </div>

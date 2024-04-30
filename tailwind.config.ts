@@ -15,11 +15,22 @@ const config: Config = {
       },
       colors:{
         primary: '#2A2141',
-        secundary: '#E1E1E6',
+        secundary: '#C4C4CC',
         progressPrimary: '#D9D9D9',
-        progressSecundary: 'rgba(0,0,0,0.5)',
+        progressSecundary: 'rgba(2,2,2,0.4)',
+        background: '#0F0D13'
 
-      }
+      },
+      screens: {
+        'tablet': '640px',
+        // => @media (min-width: 640px) { ... }
+  
+        'laptop': '1024px',
+        // => @media (min-width: 1024px) { ... }
+  
+        'desktop': '1280px',
+        // => @media (min-width: 1280px) { ... }
+      },
     },
   },
   plugins: [],
