@@ -7,6 +7,9 @@ import ProgressBar from "@ramonak/react-progress-bar";
 import { FaPause } from "react-icons/fa6";
 import "./style.css";
 
+
+
+
 export default function Player() {
   const [progress, setProgress] = useState(0);
   const [isPlay, setIsPlay] = useState(false);
@@ -71,15 +74,15 @@ export default function Player() {
   };
 
   return (
-    <div className="flex-col gap-5 bg-primary p-10 text-secundary rounded-2xl">
-      <div className="flex max-sm:flex-col gap-3 justify-center content-center ">
+    <div className="flex-col gap-5 bg-primary p-10 text-secundary rounded-2xl ">
+      <div className="flex max-sm:flex-col gap-3 justify-center content-center mb-5">
         <img src="/profile.jpg" className="block mx-auto h-24 rounded-2xl max-sm:w-full max-sm:h-auto" />
         <div className="justify-center content-center max-sm:my-4">
           <h1 className="text-2xl text-white ">Da Banda</h1>
           <h1 className="text-secundary">Por Evandro Eusébio</h1>
         </div>
       </div>
-      <div className="flex justify-center gap-20  max-sm:justify-between">
+      <div className="flex justify-center gap-20  max-sm:justify-between mb-5">
         <button>
           <IoPlayBack size={20} />
         </button>
@@ -91,7 +94,7 @@ export default function Player() {
         </button>
       </div>
       <div
-        className="w-full h-1.5 rounded-2xl bg-progressSecundary  cursor-pointer max-sm:mt-5 max-sm:mb-3"
+        className="w-full h-1.5 rounded-2xl bg-progressSecundary mb-2 cursor-pointer max-sm:mt-5 max-sm:mb-3"
         ref={clickRef}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
