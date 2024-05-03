@@ -1,20 +1,18 @@
 "use client";
-import React from "react";
+import React, {useContext} from "react";
 import Player from "@/components/Player";
 import CarrouselSongs from "@/components/CarrouselSongs";
 import { TrackProvider } from "@/fearture/TrackContext";
+import { ThemeProvider } from "@/fearture/ThemeContext";
+import AppContent from "@/components/AppContent"
 
 export default function App() {
+
   return (
     <TrackProvider>
-      <main className=" flex-col min-h-screen  justify-center items-center bg-background">
-        <div className="flex items-center justify-center p-24" >
-          <Player />
-        </div>
-        <div className="flex items-center justify-center  w-full">
-          <CarrouselSongs />
-        </div>
-      </main>
+      <ThemeProvider>
+       <AppContent/>
+      </ThemeProvider>
     </TrackProvider>
   );
 }

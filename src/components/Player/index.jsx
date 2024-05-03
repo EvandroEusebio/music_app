@@ -8,11 +8,13 @@ import "./style.css";
 import TrackContext from "@/fearture/TrackContext";
 import { tracks } from "@/utils/track_json";
 import SlicePointerPhrase from '@/utils/SlicePointerPhrase/index'
+import ThemeContext from "@/fearture/ThemeContext"
 
 
 
 export default function Player() {
   const {track, setTrack} = useContext(TrackContext)
+  const { theme, toggleTheme } = useContext(ThemeContext);
   const [progress, setProgress] = useState(0);
   const [isPlay, setIsPlay] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
