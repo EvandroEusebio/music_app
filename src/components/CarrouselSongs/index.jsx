@@ -43,12 +43,13 @@ export default function CarrouselSongs() {
       }}
       //onSwiper={(swiper) => console.log(swiper)}
       modules={[EffectCoverflow, Navigation]}
+      
     >
       {tracks.map((item, index) => (
-        <SwiperSlide key={index}>
+        <SwiperSlide key={index} >
           <img
             src={item.thumbnail}
-            className=" w-auto h-auto rounded-2xl mx-auto object-cover"
+            className=" w-full h-full rounded-2xl mx-auto object-cover"
           />
           <div className="text-secundary">
             <p className="font-bold text-2xl">{item.title}</p>
