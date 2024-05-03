@@ -1,19 +1,21 @@
 "use client";
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useRef, useEffect, useCallback, useContext } from "react";
 import { IoPlayBack } from "react-icons/io5";
 import { IoPlayForward } from "react-icons/io5";
 import { FaPlay } from "react-icons/fa";
 import ProgressBar from "@ramonak/react-progress-bar";
 import { FaPause } from "react-icons/fa6";
 import "./style.css";
-
+import TrackContext from "@/fearture/TrackContext";
 
 
 
 export default function Player() {
+  const {track, setTrack} = useContext(TrackContext)
   const [progress, setProgress] = useState(0);
   const [isPlay, setIsPlay] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
+
 
   const audioRef = React.useRef(null);
   const inputRange = React.useRef(null);
@@ -51,6 +53,7 @@ export default function Player() {
     if (isPlay) {
       if (audioRef.current) {
         audioRef.current.play();
+        
         playAnimationRef.current = requestAnimationFrame(repeat);
       }
     } else {
@@ -60,7 +63,7 @@ export default function Player() {
       }
     }
     //playAnimationRef.current = requestAnimationFrame(repeat);
-  }, [isPlay, audioRef, repeat]);
+  }, [isPlay, audioRef, repeat, track]);
 
   const formatTime = (time) => {
     if (time && !isNaN(time)) {
@@ -109,7 +112,7 @@ export default function Player() {
         <p>{formatTime(audioRef.current?.currentTime)}</p>
         <p>{formatTime(audioRef.current?.duration)}</p>
       </div>
-      <audio src="/music.mp3" ref={audioRef} />
+      <audio src={track} ref={audioRef} />
     </div>
   );
 }
