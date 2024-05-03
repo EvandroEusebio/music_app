@@ -43,7 +43,6 @@ export default function Player() {
 
   const repeat = useCallback(() => {
     const currentTime = audioRef.current?.currentTime;
-    console.log(currentTime);
     setProgress((currentTime / audioRef.current?.duration) * 100);
 
     playAnimationRef.current = requestAnimationFrame(repeat);
