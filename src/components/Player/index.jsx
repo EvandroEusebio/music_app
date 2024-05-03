@@ -3,10 +3,11 @@ import React, { useState, useRef, useEffect, useCallback, useContext } from "rea
 import { IoPlayBack } from "react-icons/io5";
 import { IoPlayForward } from "react-icons/io5";
 import { FaPlay } from "react-icons/fa";
-import ProgressBar from "@ramonak/react-progress-bar";
 import { FaPause } from "react-icons/fa6";
 import "./style.css";
 import TrackContext from "@/fearture/TrackContext";
+import { tracks } from "@/utils/track_json";
+import SlicePointerPhrase from '@/utils/SlicePointerPhrase/index'
 
 
 
@@ -15,7 +16,6 @@ export default function Player() {
   const [progress, setProgress] = useState(0);
   const [isPlay, setIsPlay] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
-
 
   const audioRef = React.useRef(null);
   const inputRange = React.useRef(null);
@@ -76,23 +76,43 @@ export default function Player() {
     return "00:00";
   };
 
+  function upTrack(){
+    let atual_track_id = track[0].id
+    let up_track = atual_track_id + 1
+    if(up_track >= tracks.length){
+      return
+    }
+    let newTrack = tracks.find(track => track.id === up_track)
+    setTrack([newTrack])
+  }
+
+  function backTrack(){
+    let atual_track_id = track[0].id
+    let up_track = atual_track_id - 1
+    if(up_track < 0){
+      return
+    }
+    let newTrack = tracks.find(track => track.id === up_track)
+    setTrack([newTrack])
+  }
+
   return (
-    <div className="flex-col gap-5 bg-primary p-10 text-secundary rounded-2xl ">
-      <div className="flex max-sm:flex-col gap-3 justify-center content-center mb-5">
-        <img src="/profile.jpg" className="block mx-auto h-24 rounded-2xl max-sm:w-full max-sm:h-auto" />
+    <div className="flex-col gap-5 bg-primary p-10 text-secundary rounded-2xl w-96">
+      <div className="flex max-sm:flex-col gap-3 justify-start content-center mb-5">
+        <img src={track[0].thumbnail} className="block  h-24 rounded-2xl max-sm:w-full max-sm:h-auto" />
         <div className="justify-center content-center max-sm:my-4">
-          <h1 className="text-2xl text-white ">Da Banda</h1>
-          <h1 className="text-secundary">Por Evandro Eusébio</h1>
+          <h1 className="text-2xl text-white ">{SlicePointerPhrase(track[0].title, 10)}</h1>
+          <h1 className="text-secundary">{track[0].author}</h1>
         </div>
       </div>
       <div className="flex justify-center gap-20  max-sm:justify-between mb-5">
-        <button>
+        <button onClick={backTrack}>
           <IoPlayBack size={20} />
         </button>
         <button onClick={() => setIsPlay(!isPlay)}>
           {isPlay ? <FaPause size={20} /> : <FaPlay size={20} />}
         </button>
-        <button>
+        <button onClick={upTrack}>
           <IoPlayForward size={20} />
         </button>
       </div>
@@ -112,7 +132,7 @@ export default function Player() {
         <p>{formatTime(audioRef.current?.currentTime)}</p>
         <p>{formatTime(audioRef.current?.duration)}</p>
       </div>
-      <audio src={track} ref={audioRef} />
+      <audio src={track[0].src} ref={audioRef} />
     </div>
   );
 }
